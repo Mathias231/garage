@@ -24,4 +24,39 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
+
+  // Adding whiteListed & userId to session
+  callbacks: {
+    // Updating session on client with columns from database. Right now its only "WhiteListed" (true or false)
+    async session({ session }) {
+      // Finds user by email
+      const userData = await prisma.user.findFirst({
+        where: {
+          email: session.user?.email,
+        },
+      });
+      // Updates session by adding whiteListed - boolean
+      const updatedSession = {
+        ...session,
+        user: {
+          ...session.user,
+          whiteListed: userData?.whiteListed,
+          userId: userData?.id,
+        },
+      };
+
+      // DefaultSession (just in case)
+      const defaultSession = {
+        user: {
+          name: '',
+          email: '',
+          image: '',
+        },
+        expires: '',
+      };
+      // Sets result as updatedSession. Sets defaultSession if something goes wrong
+      const result = updatedSession || defaultSession;
+      return result;
+    },
+  },
 });
