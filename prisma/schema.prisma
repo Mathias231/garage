@@ -43,8 +43,8 @@ model User {
   whiteListed   Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
-  // Posts         Post[]
-  // Comments      Comments[]
+  Garage        Garage[]
+  Items         Items[]
 }
 
 model VerificationToken {
@@ -56,24 +56,26 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// model Post {
-//   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-//   userId      String     @db.ObjectId
-//   title       String
-//   content     String
-//   dateCreated DateTime   @default(now())
-//   dateUpdated DateTime   @updatedAt
-//   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   Comments    Comments[]
-// }
+model Garage {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @unique @db.ObjectId
+  name        String
+  garageColor String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items       Items[]
+}
 
-// model Comments {
-//   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-//   userId      String   @db.ObjectId
-//   postId      String   @db.ObjectId
-//   content     String
-//   dateCreated DateTime @default(now())
-//   dateUpdated DateTime @updatedAt
-//   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-// }
+model Items {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @db.ObjectId
+  garageId    String   @db.ObjectId
+  name        String
+  weight      String
+  durability  Float
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  garage      Garage   @relation(fields: [garageId], references: [id], onDelete: Cascade)
+}
