@@ -6,6 +6,7 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.get(async (req, res) => {
   const { garageId } = req.query;
+  console.log(garageId);
 
   if (typeof garageId !== 'string')
     return res.status(400).send('postId is not a string.');
@@ -18,7 +19,7 @@ router.get(async (req, res) => {
       include: {
         items: {
           select: {
-            id: true,
+            garageId: true,
             name: true,
             durability: true,
             weight: true,
