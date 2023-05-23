@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import React from 'react';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import SignOutButton from './session/signOut-button';
+import SignInButton from './session/signIn-button';
 
 function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <>
       <header className="bg-gray-800 py-4">
@@ -17,7 +23,7 @@ function Navbar() {
           </div>
           <div className="flex items-center mr-4">
             <div className="mr-4">
-              {/* {session && (
+              {session && (
                 <Image
                   className="h-10 w-10 rounded-full"
                   src={session.user.image || ''}
@@ -25,14 +31,14 @@ function Navbar() {
                   width={10}
                   height={10}
                 />
-              )} */}
+              )}
             </div>
             <div className="text-gray-300 mr-4">
-              {/* {session && (
+              {session && (
                 <p className="text-sm font-medium">{session.user.name}</p>
-              )} */}
+              )}
             </div>
-            {/* {session ? <SignOutButton /> : <SignInButton />} */}
+            {session ? <SignOutButton /> : <SignInButton />}
           </div>
         </div>
       </header>
