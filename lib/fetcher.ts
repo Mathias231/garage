@@ -9,5 +9,6 @@ export const fetcher = async <T>(
     method: 'get',
     ...config,
   });
+
   return res.data;
 };
