@@ -12,7 +12,7 @@ function Navbar() {
     <>
       <header className="bg-gray-800 py-4">
         <div className=" flex items-center w-full justify-between">
-          <div className="flex items-center ml-4">
+          <div className="flex items-center ml-4 gap-4">
             <Link
               href="/"
               className="bg-gray-700  hover:bg-gray-600 text-gray-300 hover:text-white text-xl font-medium py-2 px-4 rounded"
@@ -20,6 +20,17 @@ function Navbar() {
             >
               Hjem
             </Link>
+            {session?.user.whiteListed === true ? (
+              <Link
+                href="/garage"
+                className="bg-gray-700  hover:bg-gray-600 text-gray-300 hover:text-white text-xl font-medium py-2 px-4 rounded"
+                title="Garasje"
+              >
+                Garasje
+              </Link>
+            ) : (
+              ''
+            )}
           </div>
           <div className="flex items-center mr-4">
             <div className="mr-4">
