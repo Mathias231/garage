@@ -1,10 +1,17 @@
+import axios from 'axios';
 import React, { ChangeEvent, useState } from 'react';
+import { toast } from 'react-toastify';
+interface ToolsProps {
+  garageId: string;
+  userId: string;
+}
 
-function Tools() {
+function Tools({ garageId, userId }: ToolsProps) {
   const [name, setName] = useState('');
   const [durability, setDurability] = useState(0);
   const [weight, setWeight] = useState('');
   const [image, setImage] = useState(null);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
@@ -13,9 +20,31 @@ function Tools() {
     // setImage(file);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  console.log();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Perform any necessary actions with the form data (e.g., upload to a server)
+    setButtonLoading(true);
+    await axios
+      .post('/api/item/', {
+        userId: userId,
+        garageId: garageId,
+        category: 'tools',
+        name: name,
+        weight: weight,
+        durability: durability,
+      })
+      .then((msg) => {
+        toast.success('Verktøy er blitt lagt til!', {
+          position: 'top-center',
+        });
+        setButtonLoading(false);
+      })
+      .catch((err) => {
+        toast.warn(err, {
+          position: 'top-center',
+        });
+      });
 
     // Reset the form fields
     setName('');
@@ -100,8 +129,11 @@ function Tools() {
         </div>
         <div className="flex items-center justify-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
+              buttonLoading && 'cursor-progress'
+            } `}
             type="submit"
+            disabled={buttonLoading}
           >
             Upload
           </button>
