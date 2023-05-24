@@ -60,7 +60,6 @@ model Garage {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   userId      String   @unique @db.ObjectId
   name        String
-  garageColor String
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
