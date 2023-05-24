@@ -8,6 +8,7 @@ export interface IGarage {
 interface IItems {
   userId: string;
   garageId: string;
+  category: string;
   name: string;
   weight: string;
   durability: number;

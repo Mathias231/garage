@@ -71,6 +71,7 @@ model Items {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   userId      String   @db.ObjectId
   garageId    String   @db.ObjectId
+  category    String
   name        String
   weight      String
   durability  Float
