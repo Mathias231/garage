@@ -16,6 +16,7 @@ router.get(async (req, res) => {
       where: {
         id: garageId,
       },
+
       include: {
         items: {
           select: {
