@@ -73,7 +73,6 @@ export default function Garage() {
                     <p className="mt-4 text-sm text-gray-700">
                       Weight: {item.weight}kg
                     </p>
-                    {item.id}
                     <p className="mt-4 text-sm text-gray-700">
                       Durability: {item.durability}%
                     </p>
