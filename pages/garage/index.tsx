@@ -25,16 +25,11 @@ export default function Garage() {
 
   if (!garage) return <div>No items found</div>;
 
-  const divStyle = {
-    backgroundColor: garage.garageColor,
-  };
-
   return (
     <main>
-      <div className="flex justify-center items-center" style={divStyle}>
+      <div className="bg-teal-300 flex justify-center items-center">
         <div className="p-4">
           <h1 className="text-xl font-bold">{garage.name}</h1>
-          <p className="text-sm">Color: {garage.garageColor}</p>
         </div>
       </div>
       <div className="flex justify-center mt-2">
