@@ -42,7 +42,6 @@ export default function Garage() {
       <div className="bg-teal-300 flex justify-center items-center">
         <div className="p-4">
           <h1 className="text-xl font-bold">{garage.name}</h1>
-          {}
         </div>
       </div>
       <div className="flex justify-center mt-2">
