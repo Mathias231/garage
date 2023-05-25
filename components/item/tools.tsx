@@ -54,16 +54,13 @@ function Tools({ garageId, userId }: ToolsProps) {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center mt-24">
       <form
         className="w-96 bg-white shadow-md rounded px-8 pt-6 pb-8"
         onSubmit={handleSubmit}
       >
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Name
           </label>
           <input
@@ -77,10 +74,7 @@ function Tools({ garageId, userId }: ToolsProps) {
           />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="durability"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Durability
           </label>
           <input
@@ -97,10 +91,7 @@ function Tools({ garageId, userId }: ToolsProps) {
           <div className="text-center mt-2">{durability}</div>
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="weight"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Weight
           </label>
           <input
@@ -113,10 +104,7 @@ function Tools({ garageId, userId }: ToolsProps) {
           />
         </div>
         <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="image"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2">
             Image
           </label>
           <input
