@@ -40,6 +40,18 @@ router.get(async (req, res) => {
             dateUpdated: true,
           },
         },
+        Vehicle: {
+          select: {
+            id: true,
+            garageId: true,
+            userId: true,
+            name: true,
+            category: true,
+            color: true,
+            dateCreated: true,
+            dateUpdated: true,
+          },
+        },
       },
     })
     .catch((err) => {
