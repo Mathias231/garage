@@ -45,6 +45,7 @@ model User {
   sessions      Session[]
   Garage        Garage[]
   Items         Items[]
+  Vehicle       Vehicle[]
 }
 
 model VerificationToken {
@@ -57,13 +58,14 @@ model VerificationToken {
 }
 
 model Garage {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String   @unique @db.ObjectId
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String    @unique @db.ObjectId
   name        String
-  dateCreated DateTime @default(now())
-  dateUpdated DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dateCreated DateTime  @default(now())
+  dateUpdated DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   items       Items[]
+  Vehicle     Vehicle[]
 }
 
 model Items {
@@ -78,4 +80,19 @@ model Items {
   dateUpdated DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   garage      Garage   @relation(fields: [garageId], references: [id], onDelete: Cascade)
+}
+
+model Vehicle {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String   @db.ObjectId
+  garageId       String   @db.ObjectId
+  category       String
+  name           String
+  color          String
+  model          String
+  distanceDriven Float
+  dateCreated    DateTime @default(now())
+  dateUpdated    DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  garage         Garage   @relation(fields: [garageId], references: [id], onDelete: Cascade)
 }
