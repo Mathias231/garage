@@ -3,6 +3,7 @@ export interface IGarage {
   userId: string;
   name: string;
   items: IItems[];
+  vehicle: IVehicle[];
 }
 
 interface IItems {
@@ -13,4 +14,15 @@ interface IItems {
   name: string;
   weight: string;
   durability: number;
+}
+
+interface IVehicle {
+  id: string;
+  userId: string;
+  garageId: string;
+  category: string;
+  name: string;
+  color: string;
+  model: string;
+  distanceDriven: number;
 }
