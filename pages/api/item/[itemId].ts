@@ -7,7 +7,6 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.delete(async (req, res) => {
   const itemId = z.string().parse(req.query.itemId);
-  console.log(itemId);
 
   if (typeof itemId !== 'string')
     return res.status(400).send('postId is not a string.');
