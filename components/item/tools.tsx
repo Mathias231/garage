@@ -61,13 +61,13 @@ function Tools({ garageId, userId }: ToolsProps) {
       >
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Name
+            Navn
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            placeholder="Tool Name"
+            placeholder="Verktøy Navn"
             value={name}
             required
             onChange={(e) => setName(e.target.value)}
@@ -75,7 +75,7 @@ function Tools({ garageId, userId }: ToolsProps) {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Durability
+            Varighet
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -84,7 +84,7 @@ function Tools({ garageId, userId }: ToolsProps) {
             min={0}
             max={100}
             step={1}
-            placeholder="Tool Durability"
+            placeholder="Verktøy Varighet"
             value={durability}
             onChange={(e) => setDurability(parseInt(e.target.value))}
           />
@@ -92,20 +92,20 @@ function Tools({ garageId, userId }: ToolsProps) {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Weight
+            Vekt (Kilo)
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="weight"
             type="number"
-            placeholder="Tool Weight"
+            placeholder="Verktøy Vekt"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Image
+            Bilde
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -123,7 +123,7 @@ function Tools({ garageId, userId }: ToolsProps) {
             type="submit"
             disabled={buttonLoading}
           >
-            Upload
+            Legg til
           </button>
         </div>
       </form>
