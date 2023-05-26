@@ -5,22 +5,20 @@ import { createRouter } from 'next-connect';
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.post(async (req, res) => {
-  const { userId, garageId, category, name, weight, durability } = req.body;
+  const { userId, garageId, imageId, category, name, weight, durability } =
+    req.body;
 
-  const createItem = await prisma.items
-    .create({
-      data: {
-        userId: userId,
-        garageId: garageId,
-        category: category,
-        name: name,
-        weight: weight,
-        durability: durability,
-      },
-    })
-    .catch((err) => {
-      res.status(404).send(err);
-    });
+  const createItem = await prisma.items.create({
+    data: {
+      userId: userId,
+      garageId: garageId,
+      imageId: imageId,
+      category: category,
+      name: name,
+      weight: weight,
+      durability: durability,
+    },
+  });
 
   res.status(200).send('Item Created!');
 });
