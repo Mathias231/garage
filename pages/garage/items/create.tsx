@@ -20,6 +20,7 @@ function Create() {
   });
 
   if (!session?.user.userId) return <div>Loading Session...</div>;
+  if (isLoading) return <div>Loading...</div>;
   if (!garage) return <div>No items found</div>;
 
   return (
