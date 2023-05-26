@@ -10,6 +10,9 @@ interface IItems {
   id: string;
   userId: string;
   garageId: string;
+  image: {
+    internalName: string;
+  };
   category: string;
   name: string;
   weight: string;
