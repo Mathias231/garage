@@ -18,7 +18,7 @@ export default function Garage() {
   });
 
   const { garage, isLoading, mutate } = GetGarageWithItems();
-
+  if (isLoading) return <div>Loading...</div>;
   if (!garage) return <div>No items found</div>;
 
   const handleClick = async (itemId: string) => {
@@ -58,7 +58,7 @@ export default function Garage() {
                   <a key={item.id} className="border rounded-md p-1 shadow-lg">
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
                       <Image
-                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                        src={`/api/image/${item.image.internalName}`}
                         alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
                         className="h-full w-full object-cover object-center group-hover:opacity-75"
                         width={1000}
