@@ -70,10 +70,10 @@ export default function Garage() {
                       {item.name}
                     </h3>
                     <p className="mt-4 text-sm text-gray-700">
-                      Weight: {item.weight}kg
+                      Vekt: {item.weight}kg
                     </p>
                     <p className="mt-4 text-sm text-gray-700">
-                      Durability: {item.durability}%
+                      Varighet: {item.durability}%
                     </p>
                     {session?.user.userId === item.userId ? (
                       <div>
