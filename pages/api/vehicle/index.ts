@@ -5,14 +5,23 @@ import { createRouter } from 'next-connect';
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.post(async (req, res) => {
-  const { userId, garageId, category, name, color, model, distanceDriven } =
-    req.body;
+  const {
+    userId,
+    garageId,
+    imageId,
+    category,
+    name,
+    color,
+    model,
+    distanceDriven,
+  } = req.body;
 
   const createItem = await prisma.vehicle
     .create({
       data: {
         userId: userId,
         garageId: garageId,
+        imageId: imageId,
         category: category,
         name: name,
         color: color,
