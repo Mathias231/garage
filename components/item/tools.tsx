@@ -10,35 +10,49 @@ function Tools({ garageId, userId }: ToolsProps) {
   const [name, setName] = useState('');
   const [durability, setDurability] = useState(0);
   const [weight, setWeight] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | null>(null);
   const [buttonLoading, setButtonLoading] = useState(false);
 
+  // Adding file to Image State
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
+    const file = e.target.files ? e.target.files[0] : null;
 
-    console.log(file);
-    // setImage(file);
+    if (!file)
+      return toast.warn('Something Went Wrong with Image', {
+        position: 'top-center',
+      });
+    // Sets file
+    setImage(file);
   };
 
-  console.log();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Perform any necessary actions with the form data (e.g., upload to a server)
+    if (!image) return window.alert('No image :(');
+
     setButtonLoading(true);
-    await axios
+
+    // Sending image Path, Name and ID to db and returns imageId
+    const formData = new FormData();
+    formData.append('image', image);
+    const response = await axios.post('/api/image', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Returns imageId
+    const { imageId } = response.data;
+
+    // Uploading Tool to db
+    const createItem = await axios
       .post('/api/item/', {
         userId: userId,
         garageId: garageId,
+        imageId: imageId,
         category: 'tools',
         name: name,
         weight: weight,
         durability: durability,
-      })
-      .then((msg) => {
-        toast.success('Verktøy er blitt lagt til!', {
-          position: 'top-center',
-        });
-        setButtonLoading(false);
       })
       .catch((err) => {
         toast.warn(err, {
@@ -51,6 +65,13 @@ function Tools({ garageId, userId }: ToolsProps) {
     setDurability(0);
     setWeight('');
     setImage(null);
+    setButtonLoading(false);
+
+    // Success
+    toast.success('Verktøy er blitt lagt til!', {
+      position: 'top-center',
+    });
+    return;
   };
 
   return (
