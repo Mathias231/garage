@@ -72,6 +72,7 @@ model Items {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   userId      String   @db.ObjectId
   garageId    String   @db.ObjectId
+  imageId     String   @db.ObjectId
   category    String
   name        String
   weight      String
@@ -80,12 +81,14 @@ model Items {
   dateUpdated DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   garage      Garage   @relation(fields: [garageId], references: [id], onDelete: Cascade)
+  image       Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
 }
 
 model Vehicle {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   userId         String   @db.ObjectId
   garageId       String   @db.ObjectId
+  imageId        String   @db.ObjectId
   category       String
   name           String
   color          String
@@ -95,4 +98,14 @@ model Vehicle {
   dateUpdated    DateTime @updatedAt
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   garage         Garage   @relation(fields: [garageId], references: [id], onDelete: Cascade)
+  image          Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+}
+
+model Image {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  internalName String
+  path         String
+  Vehicle      Vehicle[]
+  Items        Items[]
 }
