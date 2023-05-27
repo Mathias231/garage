@@ -12,9 +12,9 @@ export default function Garage() {
   const router = useRouter();
 
   // If user is not whiteListed, send back to startpage
-  useEffect(() => {
-    if (!session?.user.whiteListed) router.push('/');
-  });
+  // useEffect(() => {
+  //   if (!session?.user.whiteListed) router.push('/');
+  // });
 
   const { garage, isLoading, mutate } = GetGarageWithItems();
   if (isLoading) return <div>Loading...</div>;
@@ -27,16 +27,19 @@ export default function Garage() {
           <h1 className="text-xl font-bold">{garage.name}</h1>
         </div>
       </div>
-      <div className="flex justify-center mt-2">
+      <div className="flex justify-center mt-3">
         <Link href="/garage/create/" title="Legg til verktøy">
-          <FaPlus size={40} className="hover:translate-y-1" />
+          <FaPlus size={40} className="hover:animate-spin" />
         </Link>
       </div>
       <div>
         <div className="bg-white">
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl space-y-20 lg:px-8">
             <div>
-              <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+              <div className="flex justify-center text-3xl mb-5 font-semibold">
+                Verktøy
+              </div>
+              <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 mb-5">
                 {garage.items.map((item) => {
                   return (
                     <Item
@@ -52,6 +55,9 @@ export default function Garage() {
                     />
                   );
                 })}
+              </div>
+              <div className="flex justify-center text-3xl mb-5 font-semibold">
+                Transport
               </div>
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 {garage.vehicle?.map((vehicle) => {
