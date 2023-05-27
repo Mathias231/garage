@@ -6,7 +6,7 @@ const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.post(async (req, res) => {
   const { userId, garageName } = req.body;
-  console.log(userId, garageName);
+
   const createGarage = await prisma.garage.create({
     data: {
       userId: userId,
@@ -42,14 +42,22 @@ router.get(async (req, res) => {
             dateUpdated: true,
           },
         },
-        Vehicle: {
+        vehicle: {
           select: {
             id: true,
-            garageId: true,
             userId: true,
+            garageId: true,
+            imageId: true,
+            image: {
+              select: {
+                internalName: true,
+              },
+            },
             name: true,
             category: true,
             color: true,
+            model: true,
+            distanceDriven: true,
             dateCreated: true,
             dateUpdated: true,
           },
