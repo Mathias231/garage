@@ -9,9 +9,9 @@ router.delete(async (req, res) => {
   const itemId = z.string().parse(req.query.itemId);
 
   if (typeof itemId !== 'string')
-    return res.status(400).send('postId is not a string.');
+    return res.status(400).send('ItemId is not a string.');
 
-  const deletePost = await prisma.items.delete({
+  const deleteItem = await prisma.items.delete({
     where: {
       id: itemId,
     },
