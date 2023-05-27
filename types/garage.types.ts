@@ -6,7 +6,7 @@ export interface IGarage {
   vehicle: IVehicle[];
 }
 
-interface IItems {
+export interface IItems {
   id: string;
   userId: string;
   garageId: string;
@@ -19,13 +19,21 @@ interface IItems {
   durability: number;
 }
 
-interface IVehicle {
+export interface IVehicle {
   id: string;
   userId: string;
   garageId: string;
+  image: {
+    internalName: string;
+  };
   category: string;
   name: string;
   color: string;
   model: string;
   distanceDriven: number;
+}
+
+export interface addToGarageProps {
+  garageId: string;
+  userId: string;
 }
