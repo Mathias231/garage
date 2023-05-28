@@ -19,7 +19,7 @@ export default function Garage() {
 
   const { garage, isLoading, mutate } = GetGarageWithItems();
   if (isLoading) return <LoadingScreen />;
-  if (!garage) return <div>No items found</div>;
+  if (!garage) return <div>Garasjen er tom...</div>;
 
   return (
     <main>
