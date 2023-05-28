@@ -164,7 +164,7 @@ function AddVehicle({ garageId, userId }: addToGarageProps) {
             type="submit"
             disabled={buttonLoading}
           >
-            Opprett
+            Legg til
           </button>
         </div>
       </form>
