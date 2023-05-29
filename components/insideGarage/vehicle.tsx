@@ -40,9 +40,9 @@ function VehicleList(vehicle: IVehicle) {
       <h3 className="mt-1 text-lg font-medium text-gray-900 ">
         {vehicle.name}
       </h3>
-      <p className="mt-4 text-sm text-gray-700">Farge: {vehicle.color}kg</p>
+      <p className="mt-4 text-sm text-gray-700">Farge: {vehicle.color}</p>
       <p className="mt-4 text-sm text-gray-700">
-        Lengde Kjørt: {vehicle.distanceDriven}
+        Lengde Kjørt: {vehicle.distanceDriven} km
       </p>
       {session?.user.userId === vehicle.userId ? (
         <div>
