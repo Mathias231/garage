@@ -34,6 +34,17 @@ npm i
 ```
 This will install all the required packages defined inside package.json file that is needed for this website.
 
+Then generate the prisma models
+```
+prisma generate
+```
+If you're working with an empty database, then do the following command
+```
+prisma db push
+```
+This will push the generated prisma models to MongoDB and create all the needed tables.
+
+
 This project also has a few envirement ID's, so you need to create a .env file the root of this project and paste in the following content.
 The .env file contains the following variables:
 ```
