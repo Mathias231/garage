@@ -2,37 +2,45 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, clone the repo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/Mathias231/garage.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once installed, locate the "garage" folder and open folder with Visual Studio Code
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+For terminal users, navigate yourself to folder "garage"
+```
+Desktop\garage> cd garage
+```
+To open the folder in Vscode, write
+```
+Desktop\garage> code .
+```
+Once inside Visual Studio Code, run the following command in your terminal
+```
+npm i
+```
+This will install all the required packages defined inside package.json file that is needed for this project/website.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project also has a few envirement ID's, so you need to create a .env file the root of this project and paste in the following content.
+The .env file contains the following variables:
+```
+GITHUB_ID=
+GITHUB_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+MONGODB_URI=
+```
+To get the ID and SECRET ID's you can read more about them here:
+- [GitHub ID and Secret](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app)
+- [Google ID and Secret](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+For ```MongoDB_URI``` you'll need to create a cluster. Recommend to have abit of knowledge with MongoDB before starting.
+- [MongoDB](https://www.mongodb.com/)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Once all the .env variables are filled, run the website
+```
+npm run dev
+```
