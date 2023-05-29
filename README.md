@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## About this Website
+Thi is a practice project for an upcomming subject test.
+
+This website is built with:
+- [Next.js](https://nextjs.org/) - TypeScript
+- [MongoDB](https://www.mongodb.com/)
+- [Prisma](https://www.prisma.io/)
+- [AuthJs](https://authjs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+
 ## Getting Started
 
 First, clone the repo
@@ -22,7 +32,7 @@ Once inside Visual Studio Code, run the following command in your terminal
 ```
 npm i
 ```
-This will install all the required packages defined inside package.json file that is needed for this project/website.
+This will install all the required packages defined inside package.json file that is needed for this website.
 
 This project also has a few envirement ID's, so you need to create a .env file the root of this project and paste in the following content.
 The .env file contains the following variables:
