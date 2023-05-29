@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/db';
+import { IVehicle } from '@/types/garage.types';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createRouter } from 'next-connect';
 
@@ -16,7 +17,7 @@ router.post(async (req, res) => {
     distanceDriven,
   } = req.body;
 
-  const createItem = await prisma.vehicle
+  const createVehicle = await prisma.vehicle
     .create({
       data: {
         userId: userId,

@@ -6,14 +6,14 @@ import { z } from 'zod';
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
 router.delete(async (req, res) => {
-  const itemId = z.string().parse(req.query.itemId);
+  const vehicleId = z.string().parse(req.query.vehicleId);
 
-  if (typeof itemId !== 'string')
-    return res.status(400).send('ItemId is not a string.');
+  if (typeof vehicleId !== 'string')
+    return res.status(400).send('VehicleId is not a string.');
 
-  const deleteItem = await prisma.items.delete({
+  const deleteVehicle = await prisma.vehicle.delete({
     where: {
-      id: itemId,
+      id: vehicleId,
     },
   });
 

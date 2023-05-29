@@ -1,12 +1,11 @@
-import Tools from '@/components/item/tools';
-import Vehicle from '@/components/item/vehicle';
+import AddTools from '@/components/addToGarage/tools';
+import AddVehicle from '@/components/addToGarage/vehicle';
+import LoadingScreen from '@/components/loading/loadingScreen';
 import GetGarageWithItems from '@/lib/getGarageWithItems';
-import GarageId from '@/pages/api/garage/[garageId]';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 
-import { FaPhotoVideo } from 'react-icons/fa';
 function Create() {
   const { data: session } = useSession();
   const { garage, isLoading, mutate } = GetGarageWithItems();
@@ -19,9 +18,9 @@ function Create() {
     if (!session) router.push('/');
   });
 
-  if (!session?.user.userId) return <div>Loading Session...</div>;
-  if (isLoading) return <div>Loading...</div>;
-  if (!garage) return <div>No items found</div>;
+  if (!session?.user.userId) return <div>Laster inn...</div>;
+  if (isLoading) return <LoadingScreen />;
+  if (!garage) return <div>Garasjen er tom...</div>;
 
   return (
     <div>
@@ -43,9 +42,9 @@ function Create() {
       </div>
       <div>
         {toggle ? (
-          <Tools garageId={garage.id} userId={session?.user.userId} />
+          <AddTools garageId={garage.id} userId={session?.user.userId} />
         ) : (
-          <Vehicle />
+          <AddVehicle garageId={garage.id} userId={session.user.userId} />
         )}
       </div>
     </div>

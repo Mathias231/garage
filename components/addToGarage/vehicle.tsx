@@ -1,15 +1,13 @@
+import { addToGarageProps } from '@/types/garage.types';
 import axios from 'axios';
 import React, { ChangeEvent, useState } from 'react';
 import { toast } from 'react-toastify';
-interface ToolsProps {
-  garageId: string;
-  userId: string;
-}
 
-function Tools({ garageId, userId }: ToolsProps) {
-  const [name, setName] = useState('');
-  const [durability, setDurability] = useState(0);
-  const [weight, setWeight] = useState('');
+function AddVehicle({ garageId, userId }: addToGarageProps) {
+  const [vehicleName, setVehicleName] = useState('');
+  const [color, setColor] = useState('red');
+  const [distanceDriven, setDistanceDriven] = useState(0);
+  const [model, setModel] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -27,32 +25,39 @@ function Tools({ garageId, userId }: ToolsProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!image) return window.alert('No image :(');
+
+    if (!image)
+      return toast.warn('Mangler bilde', {
+        position: 'top-center',
+      });
 
     setButtonLoading(true);
 
-    // Sending image Path, Name and ID to db and returns imageId
+    // // Sending image Path, Name and ID to db and returns imageId
     const formData = new FormData();
     formData.append('image', image);
-    const response = await axios.post('/api/image', formData, {
+
+    const uploadImage = await axios.post('/api/image', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
     // Returns imageId
-    const { imageId } = response.data;
+    const { imageId } = uploadImage.data;
+    console.log(imageId);
 
     // Uploading Tool to db
-    const createItem = await axios
-      .post('/api/item/', {
+    const createVehicle = await axios
+      .post('/api/vehicle/', {
         userId: userId,
         garageId: garageId,
         imageId: imageId,
-        category: 'tools',
-        name: name,
-        weight: weight,
-        durability: durability,
+        category: 'vehicle',
+        name: vehicleName,
+        color: color,
+        model: model,
+        distanceDriven: distanceDriven,
       })
       .catch((err) => {
         toast.warn(err, {
@@ -61,9 +66,10 @@ function Tools({ garageId, userId }: ToolsProps) {
       });
 
     // Reset the form fields
-    setName('');
-    setDurability(0);
-    setWeight('');
+    setVehicleName('');
+    setColor('');
+    setDistanceDriven(0);
+    setModel('');
     setImage(null);
     setButtonLoading(false);
 
@@ -88,40 +94,54 @@ function Tools({ garageId, userId }: ToolsProps) {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
-            placeholder="Verktøy Navn"
-            value={name}
+            placeholder="Kjøretøy Navn"
+            value={vehicleName}
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setVehicleName(e.target.value)}
           />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Varighet
+            Farge
           </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="durability"
-            type="range"
-            min={0}
-            max={100}
-            step={1}
-            placeholder="Verktøy Varighet"
-            value={durability}
-            onChange={(e) => setDurability(parseInt(e.target.value))}
-          />
-          <div className="text-center mt-2">{durability}</div>
+          <select
+            className="w-full border h-11 shadow-lg rounded-lg"
+            defaultValue={'red'}
+            onChange={(e) => setColor(e.target.value)}
+          >
+            <option value={'red'}>Rød</option>
+            <option value={'blue'}>Blå</option>
+            <option value={'green'}>Grønn</option>
+            <option value={'black'}>Svart</option>
+            <option value={'gray'}>Grå</option>
+            <option value={'yellow'}>Gul</option>
+            <option value={'purple'}>Lilla</option>
+          </select>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Vekt (Kilo)
+            Modell
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="weight"
+            id="model"
+            type="text"
+            placeholder="Kjøretøy Modell"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Avstand Kjørt
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="distanceDriven"
             type="number"
-            placeholder="Verktøy Vekt"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            placeholder="Kjørt Avstand"
+            value={distanceDriven}
+            onChange={(e) => setDistanceDriven(parseInt(e.target.value))}
           />
         </div>
         <div className="mb-4">
@@ -152,4 +172,4 @@ function Tools({ garageId, userId }: ToolsProps) {
   );
 }
 
-export default Tools;
+export default AddVehicle;
